@@ -8,9 +8,9 @@ import org.telegram.telegrambots.exceptions.TelegramApiException;
 /**
  * Created by ${DPudov} on 31.10.2016.
  */
-public class MyBot extends TelegramLongPollingBot {
+public class MyBot extends TelegramWebhookBot {
 
-    public void onUpdateReceived(Update update) {
+    public BotApiMethod onWebhookUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
             String messageText = update.getMessage().getText();
             SendMessage sendMessageRequest = new SendMessage();
@@ -21,12 +21,9 @@ public class MyBot extends TelegramLongPollingBot {
             } catch (InputException e) {
                 sendMessageRequest.setText("Sorry, but I don't understand what you mean. Please try to write in format DD.MM.YYYY");
             }
-            try {
-                sendMessage(sendMessageRequest);
-            } catch (TelegramApiException e) {
-                e.printStackTrace();
-            }
+            return sendMessageRequest;
         }
+        return null;
     }
 
     public String getBotUsername() {

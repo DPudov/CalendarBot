@@ -10,6 +10,7 @@ import java.nio.channels.Channel;
 public class Main {
     public static void main(String[] args) {
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
+        System.out.println("Started");
         try {
             telegramBotsApi.registerBot(new MyBot());
         } catch (TelegramApiRequestException e) {
